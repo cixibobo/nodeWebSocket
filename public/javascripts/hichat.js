@@ -40,6 +40,7 @@ HiChat.prototype = {
                 document.getElementById('info').textContent = '!fail to connect :(';
             }
         });
+        //系统发布消息
         this.socket.on('system', function(nickName, userCount, type) {
 
             var msg = nickName + (type == 'login' ? ' joined' : ' left');
@@ -69,9 +70,11 @@ HiChat.prototype = {
                 };
             };
         }, false);
+        //发送消息click事件
         document.getElementById('sendBtn').addEventListener('click', function() {
             var messageInput = document.getElementById('messageInput'),
                 msg = messageInput.value,
+                //msg输入内容
                 color = document.getElementById('colorStyle').value;
             messageInput.value = '';
             messageInput.focus();
@@ -178,7 +181,7 @@ HiChat.prototype = {
             if (emojiIndex > totalEmojiNum) {
                 result = result.replace(match[0], '[X]');
             } else {
-                result = result.replace(match[0], '<img class="emoji" src=' + emojiIndex + '"../../../../../../WebstormProjects/nodeWebSocket/public/content/emoji/.gif" />');//todo:fix this in chrome it will cause a new request for the image
+                result = result.replace(match[0], '<img class="emoji" src=' + emojiIndex + '"../../../../../../WebstormProjects/nodeWebSocket/public/content/emoji/.gif" />');
             };
         };
         return result;
